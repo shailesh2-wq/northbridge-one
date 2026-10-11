@@ -4,7 +4,11 @@ from app.database import engine, Base, SessionLocal
 from app.api import auth, dashboard, students, staff, attendance, academics, assignments, signals, interventions, communications, fees, events, timetable, search
 from app.seed.seed_data import seed_db
 
-app = FastAPI(title="NorthBridge One API")
+app = FastAPI(
+    title="NorthBridge One API",
+    docs_url="/api/docs",
+    openapi_url="/api/openapi.json"
+)
 
 app.add_middleware(
     CORSMiddleware,
@@ -14,13 +18,31 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-Base.metadata.create_all(bind=engine)
+def ensure_db_initialized():
+    try:
+        import app.models  # noqa: F401 - ensure all tables are registered
+        Base.metadata.create_all(bind=engine)
+        db = SessionLocal()
+        try:
+            from app.models.user import User
+            if db.query(User).count() == 0:
+                seed_db(db)
+        finally:
+            db.close()
+    except Exception as e:
+        print(f"Database initialization error: {e}")
+
+# Run DB initialization
+ensure_db_initialized()
 
 @app.on_event("startup")
 def startup_event():
-    db = SessionLocal()
-    seed_db(db)
-    db.close()
+    ensure_db_initialized()
+
+@app.get("/api")
+@app.get("/api/health")
+def api_root():
+    return {"status": "ok", "app": "NorthBridge One API"}
 
 app.include_router(auth.router, prefix="/api/auth", tags=["auth"])
 app.include_router(dashboard.router, prefix="/api/dashboard", tags=["dashboard"])

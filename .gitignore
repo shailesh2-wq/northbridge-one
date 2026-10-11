@@ -1,8 +1,14 @@
 node_modules/
 __pycache__/
+*.pyc
 .venv/
 venv/
 .env
 .env.*
 !.env.example
-backend/northbridge.db
+*.db-journal
+*.db-wal
+*.db-shm
+.vercel/
+dist/
+frontend/dist/

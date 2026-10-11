@@ -204,6 +204,10 @@ def seed_db(db: Session):
     db.add(Signal(signal_type='assignment_incomplete', severity=SignalSeverity.medium, entity_type='student', entity_id=student_alex.id, title='Missing assignments for Alex Morgan', description='3 missing recently', explanation='', trigger_data={}, status=SignalStatus.open, assigned_to=teachers[0].id))
     # 4. Alex Lates
     db.add(Signal(signal_type='repeated_late', severity=SignalSeverity.medium, entity_type='student', entity_id=student_alex.id, title='Repeated late arrivals for Alex Morgan', description='4 recent lates', explanation='', trigger_data={}, status=SignalStatus.open, assigned_to=teachers[0].id))
+    # 5. Priya Sharma Workload Alert
+    db.add(Signal(signal_type='high_workload', severity=SignalSeverity.high, entity_type='staff', entity_id=teachers[0].id, title='High workload alert: Ms. Priya Sharma', description='322 submissions pending review across 113 assignments', explanation='Ms. Priya Sharma has 322 pending assignment reviews across Grade 8 Mathematics and Science classes, exceeding the normal operational turnaround SLA.', trigger_data={'pending': 322, 'overdue': 45, 'assignments': 113}, status=SignalStatus.open, assigned_to=teachers[0].id))
+    # 6. Overdue Attendance Follow-up
+    db.add(Signal(signal_type='attendance_followup_overdue', severity=SignalSeverity.medium, entity_type='student', entity_id=student_alex.id, title='Attendance follow-up overdue: Alex Morgan', description='Attendance review intervention open >14 days without follow-up.', explanation='Attendance review intervention has been open with no logged outcome.', trigger_data={'days_open': 16}, status=SignalStatus.open, assigned_to=teachers[0].id))
     
     for st in low_att_students[:5]:
         db.add(Signal(signal_type='attendance_decline', severity=SignalSeverity.medium, entity_type='student', entity_id=st.id, title=f'Attendance decline for {st.first_name}', description='', explanation='', trigger_data={}, status=SignalStatus.open, assigned_to=teachers[0].id))
