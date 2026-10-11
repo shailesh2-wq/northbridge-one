@@ -36,6 +36,6 @@ class Settings:
         # Local development: use absolute path in backend folder
         base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         local_db = os.path.join(base_dir, "northbridge.db")
-        return f"sqlite:///{local_db}"
+        return f"sqlite:///{local_db.replace(os.sep, '/')}"
 
 settings = Settings()
