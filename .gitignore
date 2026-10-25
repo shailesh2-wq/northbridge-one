@@ -12,3 +12,4 @@ venv/
 .vercel/
 dist/
 frontend/dist/
+*.zip
