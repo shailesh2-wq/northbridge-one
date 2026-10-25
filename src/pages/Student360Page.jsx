@@ -41,55 +41,57 @@ export default function Student360Page() {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="space-y-6">
       {/* Header Profile Section */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
-        <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
-          <div className="w-24 h-24 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-3xl">
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6">
+        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6">
+          <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-2xl sm:text-3xl shrink-0">
             {student.overview?.first_name?.[0]}{student.overview?.last_name?.[0]}
           </div>
-          <div className="flex-1">
-            <div className="flex items-center justify-between w-full">
+          <div className="flex-1 w-full text-center sm:text-left">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 w-full">
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">{student.overview?.first_name} {student.overview?.last_name}</h1>
-                <p className="text-sm text-gray-500">ID: {student.overview?.id} • Grade {student.overview?.grade} • {student.overview?.section}</p>
+                <h1 className="text-xl sm:text-2xl font-bold text-gray-900">{student.overview?.first_name} {student.overview?.last_name}</h1>
+                <p className="text-xs sm:text-sm text-gray-500 mt-0.5">ID: {student.overview?.id} • Grade {student.overview?.grade} • {student.overview?.section}</p>
               </div>
-              <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                student.overview?.status === 'at-risk' ? 'bg-red-100 text-red-800' :
-                student.overview?.status === 'monitor' ? 'bg-yellow-100 text-yellow-800' :
-                'bg-green-100 text-green-800'
-              }`}>
-                {student.overview?.status?.toUpperCase() || 'ON-TRACK'}
-              </span>
+              <div className="self-center sm:self-start">
+                <span className={`px-3 py-1 rounded-full text-xs sm:text-sm font-medium ${
+                  student.overview?.status === 'at-risk' ? 'bg-red-100 text-red-800' :
+                  student.overview?.status === 'monitor' ? 'bg-yellow-100 text-yellow-800' :
+                  'bg-green-100 text-green-800'
+                }`}>
+                  {student.overview?.status?.toUpperCase() || 'ON-TRACK'}
+                </span>
+              </div>
             </div>
             
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
-              <div className="flex items-center text-sm text-gray-600"><Mail className="w-4 h-4 mr-2" /> {student.overview?.parent_email || 'student@northbridge.edu.sg'}</div>
-              <div className="flex items-center text-sm text-gray-600"><Phone className="w-4 h-4 mr-2" /> {student.overview?.parent_phone || '+65 6123 4567'}</div>
-              <div className="flex items-center text-sm text-gray-600"><Calendar className="w-4 h-4 mr-2" /> DOB: {student.overview?.date_of_birth}</div>
-              <div className="flex items-center text-sm text-gray-600"><MapPin className="w-4 h-4 mr-2" /> {student.overview?.nationality || 'Singapore'}</div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mt-4 sm:mt-6 text-left">
+              <div className="flex items-center text-xs sm:text-sm text-gray-600 truncate"><Mail className="w-4 h-4 mr-2 shrink-0 text-gray-400" /> <span className="truncate break-all">{student.overview?.parent_email || 'student@northbridge.edu.sg'}</span></div>
+              <div className="flex items-center text-xs sm:text-sm text-gray-600"><Phone className="w-4 h-4 mr-2 shrink-0 text-gray-400" /> {student.overview?.parent_phone || '+65 6123 4567'}</div>
+              <div className="flex items-center text-xs sm:text-sm text-gray-600"><Calendar className="w-4 h-4 mr-2 shrink-0 text-gray-400" /> DOB: {student.overview?.date_of_birth}</div>
+              <div className="flex items-center text-xs sm:text-sm text-gray-600"><MapPin className="w-4 h-4 mr-2 shrink-0 text-gray-400" /> {student.overview?.nationality || 'Singapore'}</div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Tabs */}
-      <div className="bg-white border-b border-gray-200 mb-6">
-        <nav className="-mb-px flex space-x-8 px-6" aria-label="Tabs">
+      {/* Responsive Horizontal Scroll Tabs */}
+      <div className="bg-white rounded-xl shadow-xs border border-gray-200 overflow-x-auto scrollbar-none">
+        <nav className="-mb-px flex space-x-2 sm:space-x-8 px-4 sm:px-6 min-w-max" aria-label="Tabs">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               className={`
-                whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm
+                whitespace-nowrap py-3 sm:py-4 px-2 sm:px-1 border-b-2 font-medium text-xs sm:text-sm transition-colors
                 ${activeTab === tab.id
-                  ? 'border-blue-500 text-blue-600'
+                  ? 'border-blue-500 text-blue-600 font-semibold'
                   : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}
               `}
             >
               {tab.label}
               {tab.id === 'signals' && student.active_signals?.length > 0 && (
-                <span className="ml-2 bg-red-100 text-red-600 py-0.5 px-2 rounded-full text-xs">{student.active_signals.length}</span>
+                <span className="ml-1.5 bg-red-100 text-red-600 py-0.5 px-1.5 sm:px-2 rounded-full text-[11px] sm:text-xs">{student.active_signals.length}</span>
               )}
             </button>
           ))}
@@ -99,48 +101,48 @@ export default function Student360Page() {
       {/* Tab Content */}
       <div className="min-h-[400px]">
         {activeTab === 'overview' && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-               <h3 className="text-lg font-semibold mb-4">Quick Stats</h3>
-               <div className="grid grid-cols-2 gap-4">
-                  <div className="p-4 bg-gray-50 rounded-lg">
-                     <p className="text-sm text-gray-500">Attendance</p>
-                     <p className="text-2xl font-bold">{student.attendance_summary?.current_rate ? student.attendance_summary.current_rate.toFixed(1) : 100}%</p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6">
+               <h3 className="text-base sm:text-lg font-semibold mb-4 text-gray-900">Quick Stats</h3>
+               <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                  <div className="p-3 sm:p-4 bg-gray-50 rounded-lg">
+                     <p className="text-xs sm:text-sm text-gray-500">Attendance</p>
+                     <p className="text-xl sm:text-2xl font-bold text-gray-900 mt-1">{student.attendance_summary?.current_rate ? student.attendance_summary.current_rate.toFixed(1) : 100}%</p>
                   </div>
-                  <div className="p-4 bg-gray-50 rounded-lg">
-                     <p className="text-sm text-gray-500">GPA</p>
-                     <p className="text-2xl font-bold">{student.academics?.current_gpa || 'N/A'}</p>
+                  <div className="p-3 sm:p-4 bg-gray-50 rounded-lg">
+                     <p className="text-xs sm:text-sm text-gray-500">GPA</p>
+                     <p className="text-xl sm:text-2xl font-bold text-gray-900 mt-1">{student.academics?.current_gpa || 'N/A'}</p>
                   </div>
                </div>
             </div>
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-               <h3 className="text-lg font-semibold mb-4">Recent Timeline</h3>
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6">
+               <h3 className="text-base sm:text-lg font-semibold mb-4 text-gray-900">Recent Timeline</h3>
                <StudentTimeline events={student.timeline?.slice(0, 3)} />
             </div>
           </div>
         )}
 
         {activeTab === 'attendance' && (
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h3 className="text-lg font-semibold mb-4">Attendance Trend (Last 12 Weeks)</h3>
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6">
+            <h3 className="text-base sm:text-lg font-semibold mb-4 text-gray-900">Attendance Trend (Last 12 Weeks)</h3>
             <AttendanceChart data={student.attendance_summary?.weekly_trend || []} />
           </div>
         )}
 
         {activeTab === 'academics' && (
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h3 className="text-lg font-semibold mb-4">Current Grades by Subject</h3>
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6">
+            <h3 className="text-base sm:text-lg font-semibold mb-4 text-gray-900">Current Grades by Subject</h3>
             <AcademicChart data={student.academics?.subjects || []} />
           </div>
         )}
 
         {activeTab === 'signals' && (
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {student.active_signals?.map(signal => (
               <SignalCard key={signal.id} signal={signal} />
             ))}
             {(!student.active_signals || student.active_signals.length === 0) && (
-              <div className="text-center py-12 bg-white rounded-xl border border-gray-200 text-gray-500">
+              <div className="text-center py-12 bg-white rounded-xl border border-gray-200 text-gray-500 text-sm">
                 No active signals for this student.
               </div>
             )}
@@ -148,12 +150,12 @@ export default function Student360Page() {
         )}
 
         {activeTab === 'interventions' && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {student.interventions?.active?.map(inv => (
               <InterventionCard key={inv.id} intervention={inv} />
             ))}
             {(!student.interventions?.active || student.interventions.active.length === 0) && (
-              <div className="col-span-full text-center py-12 bg-white rounded-xl border border-gray-200 text-gray-500">
+              <div className="col-span-full text-center py-12 bg-white rounded-xl border border-gray-200 text-gray-500 text-sm">
                 No active interventions recorded.
               </div>
             )}
@@ -161,7 +163,7 @@ export default function Student360Page() {
         )}
 
         {activeTab === 'timeline' && (
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6">
             <StudentTimeline events={student.timeline} />
           </div>
         )}

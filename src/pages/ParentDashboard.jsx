@@ -31,74 +31,74 @@ export default function ParentDashboard() {
   if (!data) return <div className="p-8 text-center text-red-500">Error loading dashboard</div>;
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div className="flex items-center gap-4 mb-8">
-        <div className="w-16 h-16 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-2xl">
+    <div className="space-y-6 sm:space-y-8">
+      <div className="flex items-center gap-3 sm:gap-4">
+        <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xl sm:text-2xl shrink-0">
           {user?.name?.charAt(0) || 'P'}
         </div>
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Parent Dashboard</h1>
-          <p className="text-sm text-gray-500">Welcome, {user?.name}</p>
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Parent Dashboard</h1>
+          <p className="text-xs sm:text-sm text-gray-500">Welcome, {user?.name}</p>
         </div>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8 flex items-center justify-between">
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h3 className="text-sm font-medium text-gray-500">Today's Attendance</h3>
-          <p className="text-lg font-semibold text-gray-900 mt-1 flex items-center capitalize">
+          <h3 className="text-xs sm:text-sm font-medium text-gray-500">Today's Attendance</h3>
+          <p className="text-base sm:text-lg font-semibold text-gray-900 mt-1 flex items-center capitalize">
             {data.attendance_today === 'present' ? (
-               <><CheckCircle className="w-5 h-5 text-green-500 mr-2" /> {data.attendance_today}</>
+               <><CheckCircle className="w-5 h-5 text-green-500 mr-2 shrink-0" /> {data.attendance_today}</>
             ) : (
-               <><Clock className="w-5 h-5 text-yellow-500 mr-2" /> {data.attendance_today}</>
+               <><Clock className="w-5 h-5 text-yellow-500 mr-2 shrink-0" /> {data.attendance_today}</>
             )}
           </p>
         </div>
-        <div className="text-right">
-          <h3 className="text-sm font-medium text-gray-500">Fee Status</h3>
-          <p className="text-base font-semibold text-gray-900 mt-1">{data.fee_status}</p>
+        <div className="sm:text-right border-t sm:border-t-0 pt-3 sm:pt-0 border-gray-100">
+          <h3 className="text-xs sm:text-sm font-medium text-gray-500">Fee Status</h3>
+          <p className="text-sm sm:text-base font-semibold text-gray-900 mt-0.5">{data.fee_status}</p>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
         <MetricCard label="Pending Assignments" value={data.pending_assignments?.length || 0} icon={BookOpen} to="/assignments" />
         <MetricCard label="Unread Messages" value={data.unread_messages_count || 0} icon={Clock} to="/communications" />
         <MetricCard label="Tuition & Fees" value={data.fee_status || "Check"} icon={CheckCircle} to="/fees" />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Recent Academic Updates</h2>
-          <div className="space-y-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6">
+          <h2 className="text-base sm:text-lg font-semibold text-gray-900 mb-4">Recent Academic Updates</h2>
+          <div className="space-y-3 sm:space-y-4">
              {data.recent_academic_updates?.length > 0 ? (
                  data.recent_academic_updates.map((update, i) => (
                    <div key={i} className="flex justify-between items-center border-b border-gray-50 pb-3 last:border-0 last:pb-0">
                      <div>
-                       <div className="font-medium text-gray-900">{update.subject}</div>
-                       <div className="text-xs text-gray-500">{update.term} • {update.date}</div>
+                       <div className="font-medium text-xs sm:text-sm text-gray-900">{update.subject}</div>
+                       <div className="text-[11px] sm:text-xs text-gray-500">{update.term} • {update.date}</div>
                      </div>
-                     <div className={`text-sm font-bold ${update.grade < 70 ? 'text-red-600' : 'text-gray-900'}`}>
+                     <div className={`text-xs sm:text-sm font-bold ${update.grade < 70 ? 'text-red-600' : 'text-gray-900'}`}>
                        {update.grade}%
                      </div>
                    </div>
                  ))
              ) : (
-                 <div className="text-sm text-gray-500">No recent updates</div>
+                 <div className="text-xs sm:text-sm text-gray-500">No recent updates</div>
              )}
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">School Announcements</h2>
-          <div className="space-y-4">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6">
+          <h2 className="text-base sm:text-lg font-semibold text-gray-900 mb-4">School Announcements</h2>
+          <div className="space-y-3 sm:space-y-4">
              {data.school_announcements?.length > 0 ? (
                  data.school_announcements.map((ann, i) => (
                    <div key={i} className="flex flex-col border-b border-gray-50 pb-3 last:border-0 last:pb-0">
-                     <div className="font-medium text-gray-900">{ann.title}</div>
-                     <div className="text-xs text-gray-500 mt-0.5">{ann.date}</div>
+                     <div className="font-medium text-xs sm:text-sm text-gray-900">{ann.title}</div>
+                     <div className="text-[11px] sm:text-xs text-gray-500 mt-0.5">{ann.date}</div>
                    </div>
                  ))
              ) : (
-                 <div className="text-sm text-gray-500">No announcements</div>
+                 <div className="text-xs sm:text-sm text-gray-500">No announcements</div>
              )}
           </div>
         </div>

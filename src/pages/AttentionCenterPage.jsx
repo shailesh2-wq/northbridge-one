@@ -56,25 +56,25 @@ export default function AttentionCenterPage() {
   });
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
+    <div className="space-y-6 sm:space-y-8">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
             {user?.role === 'teacher' ? 'My Action Items' : 'Attention Center'}
           </h1>
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-xs sm:text-sm text-gray-500 mt-0.5">
             {user?.role === 'teacher' 
               ? 'Priority alerts and pending tasks for your classes.' 
               : 'Review and act on priority operational signals.'}
           </p>
         </div>
         
-        <div className="flex items-center gap-2">
-          <Filter className="w-5 h-5 text-gray-400" />
+        <div className="flex items-center gap-2 w-full sm:w-auto">
+          <Filter className="w-4 h-4 text-gray-400 shrink-0" />
           <select 
             value={filter} 
             onChange={(e) => setFilter(e.target.value)}
-            className="border-gray-300 rounded-lg text-sm focus:ring-blue-500 focus:border-blue-500"
+            className="w-full sm:w-auto border-gray-300 rounded-lg text-xs sm:text-sm focus:ring-blue-500 focus:border-blue-500 py-1.5 sm:py-2 pl-3 pr-8"
           >
             <option value="all">All Severities</option>
             <option value="critical">Critical</option>
@@ -86,14 +86,14 @@ export default function AttentionCenterPage() {
       </div>
 
       {loading ? (
-        <div className="text-center py-12 text-gray-500">Loading signals...</div>
+        <div className="text-center py-12 text-gray-500 text-sm">Loading signals...</div>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           {filteredSignals.map(signal => (
             <AttentionCard key={signal.id} signal={signal} onAction={handleAction} />
           ))}
           {filteredSignals.length === 0 && (
-            <div className="text-center py-12 bg-white rounded-xl border border-gray-200 text-gray-500">
+            <div className="text-center py-12 bg-white rounded-xl border border-gray-200 text-gray-500 text-sm">
               No signals found for the selected filter.
             </div>
           )}

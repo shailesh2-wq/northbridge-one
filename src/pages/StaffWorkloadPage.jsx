@@ -58,21 +58,21 @@ export default function StaffWorkloadPage() {
   const assignmentsCount = triggerData.assignments || 113;
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <button onClick={() => navigate(-1)} className="flex items-center text-sm font-medium text-gray-500 hover:text-gray-900 mb-6">
+    <div className="space-y-6 max-w-4xl">
+      <button onClick={() => navigate(-1)} className="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-900">
         <ArrowLeft className="w-4 h-4 mr-2" /> Back to Dashboard
       </button>
 
-      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden mb-6 shadow-sm">
-        <div className="px-6 py-5 border-b border-gray-200 bg-gray-50 flex flex-wrap justify-between items-center gap-4">
+      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+        <div className="p-4 sm:px-6 sm:py-5 border-b border-gray-200 bg-gray-50 flex flex-wrap justify-between items-center gap-4">
           <div className="flex items-center">
-            <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mr-4">
+            <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mr-4 shrink-0">
               <User className="w-6 h-6" />
             </div>
             <div>
               <h1 className="text-xl font-bold text-gray-900">{staffName}</h1>
               <p className="text-sm text-gray-500 flex items-center mt-1">
-                <Activity className="w-4 h-4 mr-1 text-gray-400" /> Staff Workload & Operational Status
+                <Activity className="w-4 h-4 mr-1 text-gray-400 shrink-0" /> Staff Workload & Operational Status
               </p>
             </div>
           </div>
@@ -89,38 +89,38 @@ export default function StaffWorkloadPage() {
         </div>
         
         {/* Workload Stats */}
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           <h2 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">Current Workload Overview</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-blue-50 rounded-lg p-5 border border-blue-100 shadow-sm">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+            <div className="bg-blue-50 rounded-lg p-4 sm:p-5 border border-blue-100 shadow-sm">
               <div className="flex items-center text-blue-600 mb-3">
-                <CheckSquare className="w-5 h-5 mr-2" />
+                <CheckSquare className="w-5 h-5 mr-2 shrink-0" />
                 <h3 className="font-semibold text-sm">Active Assignments</h3>
               </div>
-              <p className="text-3xl font-bold text-gray-900">{assignmentsCount}</p>
+              <p className="text-2xl sm:text-3xl font-bold text-gray-900">{assignmentsCount}</p>
               <p className="text-xs text-gray-500 mt-1">Total active course assignments</p>
             </div>
-            <div className="bg-orange-50 rounded-lg p-5 border border-orange-100 shadow-sm">
+            <div className="bg-orange-50 rounded-lg p-4 sm:p-5 border border-orange-100 shadow-sm">
               <div className="flex items-center text-orange-600 mb-3">
-                <AlertCircle className="w-5 h-5 mr-2" />
+                <AlertCircle className="w-5 h-5 mr-2 shrink-0" />
                 <h3 className="font-semibold text-sm">Pending Tasks</h3>
               </div>
-              <p className="text-3xl font-bold text-gray-900">{pendingTasks}</p>
+              <p className="text-2xl sm:text-3xl font-bold text-gray-900">{pendingTasks}</p>
               <p className="text-xs text-gray-500 mt-1">Submissions waiting for review</p>
             </div>
-            <div className="bg-red-50 rounded-lg p-5 border border-red-100 shadow-sm">
+            <div className="bg-red-50 rounded-lg p-4 sm:p-5 border border-red-100 shadow-sm">
               <div className="flex items-center text-red-600 mb-3">
-                <Clock className="w-5 h-5 mr-2" />
+                <Clock className="w-5 h-5 mr-2 shrink-0" />
                 <h3 className="font-semibold text-sm">Overdue Tasks</h3>
               </div>
-              <p className="text-3xl font-bold text-gray-900">{overdueTasks}</p>
+              <p className="text-2xl sm:text-3xl font-bold text-gray-900">{overdueTasks}</p>
               <p className="text-xs text-gray-500 mt-1">Grading past standard turnaround SLA</p>
             </div>
           </div>
         </div>
 
         {/* Cause of Alert */}
-        <div className="px-6 py-5 border-t border-gray-200">
+        <div className="p-4 sm:px-6 sm:py-5 border-t border-gray-200">
           <h3 className="text-sm font-semibold text-gray-900 mb-2">What is causing this workload alert?</h3>
           <p className="text-sm text-gray-700 bg-gray-50 p-4 rounded-lg border border-gray-100 leading-relaxed">
             {currentSignal.explanation || currentSignal.description}
@@ -128,16 +128,16 @@ export default function StaffWorkloadPage() {
         </div>
 
         {/* Actions */}
-        <div className="px-6 py-4 bg-gray-50 border-t border-gray-200 flex flex-wrap justify-end gap-3">
+        <div className="p-4 sm:px-6 bg-gray-50 border-t border-gray-200 flex flex-col sm:flex-row justify-end gap-3">
           <button 
             onClick={() => navigate('/search?q=' + encodeURIComponent(staffName))}
-            className="px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors"
+            className="w-full sm:w-auto px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors text-center"
           >
             View Staff Details
           </button>
           <button 
             onClick={() => navigate('/communications')} 
-            className="px-5 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 flex items-center shadow-sm transition-colors"
+            className="w-full sm:w-auto px-5 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 inline-flex items-center justify-center shadow-sm transition-colors text-center"
           >
             Follow Up with Staff Member
           </button>

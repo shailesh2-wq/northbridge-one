@@ -149,34 +149,34 @@ export default function AttentionCard({ signal, onAction }) {
   };
 
   return (
-    <div className={`p-4 rounded-lg border ${styles.bg} ${styles.border} mb-3`}>
+    <div className={`p-3.5 sm:p-4 rounded-xl border ${styles.bg} ${styles.border} mb-3 shadow-xs`}>
       <div className="flex items-start gap-3">
-        <div className={`mt-0.5 ${styles.icon}`}>
+        <div className={`mt-0.5 shrink-0 ${styles.icon}`}>
           {getIcon(signal.severity)}
         </div>
         <div className="flex-1 min-w-0">
-          <div className="flex items-center justify-between mb-1">
-            <h4 className={`text-sm font-semibold ${styles.text} truncate`}>{signal.title}</h4>
-            <div className="flex items-center text-xs text-gray-500 ml-2">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-1.5">
+            <h4 className={`text-sm font-semibold ${styles.text} break-words`}>{signal.title}</h4>
+            <div className="flex items-center text-xs text-gray-500 shrink-0">
               <Clock className="w-3 h-3 mr-1" />
               {signal.timeAgo || 'Just now'}
             </div>
           </div>
-          <p className="text-sm text-gray-700 mb-2">{signal.explanation || signal.description}</p>
-          <div className="flex flex-wrap items-center gap-2 mt-3 mb-4">
-            <span className="text-xs font-medium text-gray-600 bg-white px-2 py-1 rounded border border-gray-200 capitalize">
+          <p className="text-xs sm:text-sm text-gray-700 mb-2.5 leading-relaxed">{signal.explanation || signal.description}</p>
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 my-2.5">
+            <span className="text-[11px] sm:text-xs font-medium text-gray-600 bg-white px-2 py-0.5 rounded border border-gray-200 capitalize">
               Entity: {signal.entity_type || 'Student'}
             </span>
-            <span className="text-xs font-medium text-gray-600 bg-white px-2 py-1 rounded border border-gray-200">
+            <span className="text-[11px] sm:text-xs font-medium text-gray-600 bg-white px-2 py-0.5 rounded border border-gray-200">
               Category: {getCategory(signal.signal_type)}
             </span>
-            <span className={`text-xs font-medium px-2 py-1 rounded border capitalize ${styles.bg} ${styles.border} ${styles.text}`}>
+            <span className={`text-[11px] sm:text-xs font-medium px-2 py-0.5 rounded border capitalize ${styles.bg} ${styles.border} ${styles.text}`}>
               Severity: {signal.severity || 'Medium'}
             </span>
             <select 
               value={status}
               onChange={handleStatusChange}
-              className={`text-xs font-medium px-2 py-1 rounded border capitalize cursor-pointer outline-none appearance-none ${
+              className={`text-[11px] sm:text-xs font-medium px-2 py-0.5 rounded border capitalize cursor-pointer outline-none appearance-none ${
                 status === 'open' ? 'bg-blue-50 text-blue-700 border-blue-200' : 'bg-gray-50 text-gray-700 border-gray-200'
               }`}
             >
@@ -186,23 +186,23 @@ export default function AttentionCard({ signal, onAction }) {
             </select>
           </div>
 
-          <div className="mb-4">
-            <h5 className="text-sm font-semibold text-gray-900 mb-2">Why this needs attention</h5>
+          <div className="mb-3 pt-1">
+            <h5 className="text-xs sm:text-sm font-semibold text-gray-900 mb-1.5">Why this needs attention</h5>
             <ul className="list-disc list-inside space-y-1">
               {getReasons(signal).map((reason, idx) => (
-                <li key={idx} className="text-sm text-gray-700">{reason}</li>
+                <li key={idx} className="text-xs sm:text-sm text-gray-700 leading-normal">{reason}</li>
               ))}
             </ul>
           </div>
           
-          <div className="bg-white/60 p-2.5 rounded border border-white/50 text-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <span className="text-gray-700">
-              <span className="font-semibold text-gray-900 mr-2">Recommended Action:</span> 
+          <div className="bg-white/70 p-2.5 sm:p-3 rounded-lg border border-white/60 text-xs sm:text-sm flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+            <span className="text-gray-700 leading-snug">
+              <span className="font-semibold text-gray-900 mr-1.5">Recommended Action:</span> 
               {getRecommendedAction(signal.signal_type)}
             </span>
             <button
               onClick={handleClick}
-              className={`text-sm font-medium ${styles.text} flex items-center hover:underline whitespace-nowrap cursor-pointer`}
+              className={`text-xs sm:text-sm font-semibold ${styles.text} flex items-center hover:underline whitespace-nowrap self-start sm:self-auto cursor-pointer shrink-0`}
             >
               Take Action <ArrowRight className="w-4 h-4 ml-1" />
             </button>

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import DemoBanner from './DemoBanner';
 import Sidebar from './Sidebar';
@@ -7,6 +8,12 @@ import { useAuth } from '../../contexts/AuthContext';
 export default function AppLayout() {
   const location = useLocation();
   const { user } = useAuth();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Close mobile drawer whenever location/route changes
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
   
   // Basic title extraction from path for header
   const getPageTitle = () => {
@@ -24,17 +31,25 @@ export default function AppLayout() {
     if (path.startsWith('/search')) return 'Search Results';
     if (path.startsWith('/case-study')) return 'Case Study';
     if (path.startsWith('/reports')) return 'Reports & Analytics';
+    if (path.startsWith('/staff-workload')) return 'Staff Workload Details';
     return 'NorthBridge One';
   };
 
   return (
-    <div className="min-h-screen bg-surface-secondary flex flex-col">
-      <div className="flex flex-1">
-        <Sidebar />
-        <div className="flex-1 ml-64 flex flex-col">
-          <Header title={getPageTitle()} />
-          <main className="flex-1 p-8">
-            <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-surface-secondary flex flex-col w-full overflow-x-hidden">
+      <DemoBanner />
+      <div className="flex flex-1 relative">
+        <Sidebar 
+          isOpen={isMobileMenuOpen} 
+          onClose={() => setIsMobileMenuOpen(false)} 
+        />
+        <div className="flex-1 lg:ml-64 ml-0 flex flex-col min-w-0 w-full transition-all duration-300">
+          <Header 
+            title={getPageTitle()} 
+            onToggleMobileMenu={() => setIsMobileMenuOpen(prev => !prev)} 
+          />
+          <main className="flex-1 p-3.5 sm:p-6 lg:p-8">
+            <div className="max-w-7xl mx-auto w-full">
               <Outlet />
             </div>
           </main>

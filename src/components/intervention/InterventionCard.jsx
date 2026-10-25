@@ -42,16 +42,14 @@ export default function InterventionCard({ intervention }) {
       <h3 className="text-base font-semibold text-gray-900 mb-1">{intervention.title}</h3>
       <p className="text-sm text-gray-600 mb-4 line-clamp-2">{intervention.description}</p>
       
-      <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
-        <div className="flex items-center gap-4">
-          <div className="flex items-center text-xs text-gray-600">
-            <User className="w-3.5 h-3.5 mr-1 text-gray-400" />
-            <span className="truncate max-w-[100px]">{intervention.studentName || `Student #${intervention.student_id}`}</span>
-          </div>
-          <div className="flex items-center text-xs text-gray-600">
-            <CheckSquare className="w-3.5 h-3.5 mr-1 text-gray-400" />
-            <span>Owner: {intervention.assigned_to ? (intervention.assignedToName || `Staff #${intervention.assigned_to}`) : 'Unassigned'}</span>
-          </div>
+      <div className="flex flex-wrap items-center justify-between gap-2 mt-4 pt-4 border-t border-gray-100">
+        <div className="flex items-center text-xs text-gray-600">
+          <User className="w-3.5 h-3.5 mr-1 text-gray-400 shrink-0" />
+          <span className="truncate max-w-[120px]">{intervention.studentName || `Student #${intervention.student_id}`}</span>
+        </div>
+        <div className="flex items-center text-xs text-gray-600">
+          <CheckSquare className="w-3.5 h-3.5 mr-1 text-gray-400 shrink-0" />
+          <span>Owner: {intervention.assigned_to ? (intervention.assignedToName || `Staff #${intervention.assigned_to}`) : 'Unassigned'}</span>
         </div>
       </div>
     </div>

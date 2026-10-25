@@ -26,28 +26,28 @@ export default function CommunicationsPage() {
   const unreadCount = messages.filter(m => m.to_user_id === user?.id && !m.is_read).length;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex gap-6 h-[calc(100vh-80px)]">
+    <div className="flex flex-col md:flex-row gap-4 sm:gap-6 min-h-[500px] md:h-[calc(100vh-140px)]">
       {/* Sidebar */}
-      <div className="w-64 flex-shrink-0">
-        <button className="w-full mb-6 flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700">
+      <div className="w-full md:w-64 flex-shrink-0">
+        <button className="w-full mb-3 md:mb-6 flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700">
           <Mail className="w-4 h-4 mr-2" /> Compose
         </button>
-        <nav className="space-y-1">
-          <a href="#" className="flex items-center px-3 py-2 bg-blue-50 text-blue-700 rounded-lg text-sm font-medium">
-            <Inbox className="w-4 h-4 mr-3" /> Inbox
-            {unreadCount > 0 && <span className="ml-auto bg-blue-100 text-blue-600 py-0.5 px-2 rounded-full text-xs">{unreadCount}</span>}
+        <nav className="flex flex-row md:flex-col gap-2 overflow-x-auto pb-2 md:pb-0">
+          <a href="#" className="whitespace-nowrap flex items-center px-3 py-2 bg-blue-50 text-blue-700 rounded-lg text-sm font-medium">
+            <Inbox className="w-4 h-4 mr-2 md:mr-3" /> Inbox
+            {unreadCount > 0 && <span className="ml-2 bg-blue-100 text-blue-600 py-0.5 px-2 rounded-full text-xs">{unreadCount}</span>}
           </a>
-          <a href="#" className="flex items-center px-3 py-2 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-100">
-            <Send className="w-4 h-4 mr-3" /> Sent
+          <a href="#" className="whitespace-nowrap flex items-center px-3 py-2 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-100">
+            <Send className="w-4 h-4 mr-2 md:mr-3" /> Sent
           </a>
-          <a href="#" className="flex items-center px-3 py-2 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-100">
-            <Star className="w-4 h-4 mr-3" /> Starred
+          <a href="#" className="whitespace-nowrap flex items-center px-3 py-2 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-100">
+            <Star className="w-4 h-4 mr-2 md:mr-3" /> Starred
           </a>
         </nav>
       </div>
 
       {/* Message List */}
-      <div className="flex-1 bg-white border border-gray-200 rounded-xl overflow-hidden flex flex-col">
+      <div className="flex-1 bg-white border border-gray-200 rounded-xl overflow-hidden flex flex-col min-h-[400px]">
         <div className="p-4 border-b border-gray-200 flex justify-between items-center bg-gray-50">
           <h2 className="font-semibold text-gray-900">Inbox</h2>
         </div>

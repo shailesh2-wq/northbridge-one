@@ -5,7 +5,7 @@ import Button from '../components/ui/Button';
 
 export default function NotFoundPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-surface-secondary">
+    <div className="min-h-screen flex items-center justify-center bg-surface-secondary px-4">
       <EmptyState 
         icon={AlertCircle}
         title="Page Not Found"

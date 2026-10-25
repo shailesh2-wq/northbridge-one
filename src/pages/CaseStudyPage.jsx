@@ -5,20 +5,20 @@ import { Link } from 'react-router-dom';
 export default function CaseStudyPage() {
   return (
     <div className="bg-white min-h-screen">
-      <div className="bg-slate-900 text-white py-16 px-4 sm:px-6 lg:px-8">
+      <div className="bg-slate-900 text-white py-10 sm:py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
-          <span className="bg-blue-900 text-blue-200 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-4 inline-block">Product Management Portfolio</span>
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-6 mt-2">
+          <span className="bg-blue-900 text-blue-200 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 inline-block">Product Management Portfolio</span>
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4 sm:mb-6 mt-2">
             NorthBridge One: Case Study
           </h1>
-          <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-xl text-slate-300 mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed">
             Connecting fragmented operational data into actionable educational context.
           </p>
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 prose prose-lg prose-blue">
-        <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-8 text-sm text-yellow-800 not-prose">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 prose prose-sm sm:prose-base lg:prose-lg prose-blue">
+        <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-8 text-sm text-yellow-800 not-prose rounded-r-lg">
           <strong>Note:</strong> This case study is based on simulated stakeholder discovery and secondary research. It is a portfolio prototype designed to demonstrate product management and UX reasoning. No real interviews were conducted.
         </div>
 
